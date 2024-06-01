@@ -9,7 +9,7 @@ resource "aws_codepipeline" "default" {
       owner            = "AWS"
       provider         = "CodeStarSourceConnection"
       version          = 1
-      output_artifacts = ["Source"]
+      output_artifacts = ["source_output"]
       configuration = {
         ConnectionArn    = aws_codestarconnections_connection.example.arn
         FullRepositoryId = "Yutan0423/terraform-design"
@@ -25,7 +25,7 @@ resource "aws_codepipeline" "default" {
       owner            = "AWS"
       provider         = "CodeBuild"
       version          = 1
-      input_artifacts  = ["Source"]
+      input_artifacts  = ["source_output"]
       output_artifacts = ["Build"]
       configuration = {
         ProjectName = aws_codebuild_project.default.id
