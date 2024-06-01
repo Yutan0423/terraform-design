@@ -1,5 +1,6 @@
-provider "github" {
-  organization = "Yutan0423"
+resource "aws_codestarconnections_connection" "example" {
+  name          = "my-connection"
+  provider_type = "GitHub"
 }
 
 resource "github_repository_webhook" "default" {

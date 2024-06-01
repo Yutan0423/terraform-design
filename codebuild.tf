@@ -8,7 +8,7 @@ resource "aws_codebuild_project" "default" {
     type = "CODEPIPELINE"
   }
   environment {
-    type            = "LINUXCONTAINER"
+    type            = "LINUX_CONTAINER"
     compute_type    = "BUILD_GENERAL1_SMALL"
     image           = "aws/codebuild/standard:2.0"
     privileged_mode = true

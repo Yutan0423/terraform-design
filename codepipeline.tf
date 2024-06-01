@@ -6,15 +6,14 @@ resource "aws_codepipeline" "default" {
     action {
       name             = "Source"
       category         = "Source"
-      owner            = "ThirdParty"
-      provider         = "GitHub"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
       version          = 1
       output_artifacts = ["Source"]
       configuration = {
-        Owner                = "Yutan0423"
-        Repo                 = "terraform-design"
-        Branch               = "master"
-        PollForSourceChanges = false
+        ConnectionArn    = aws_codestarconnections_connection.example.arn
+        FullRepositoryId = "Yutan0423/terraform-design"
+        BranchName       = "main"
       }
     }
   }
@@ -63,7 +62,7 @@ resource "aws_codepipeline_webhook" "default" {
   authentication  = "GITHUB_HMAC"
 
   authentication_configuration {
-    secrect_token = "VeryRandomStringMoreThan20Byte!"
+    secret_token = "VeryRandomStringMoreThan20Byte!"
   }
 
   filter {

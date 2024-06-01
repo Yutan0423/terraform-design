@@ -98,8 +98,13 @@ resource "aws_s3_bucket_policy" "alb_log" {
 
 resource "aws_s3_bucket" "artifact" {
   bucket = "artifact-pragmatic-terraform-20240601"
-  lifecycle {
-    enabled = true
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "artifact" {
+  bucket = aws_s3_bucket.artifact.id
+  rule {
+    id     = "artifact"
+    status = "Enabled"
     expiration {
       days = "30"
     }
